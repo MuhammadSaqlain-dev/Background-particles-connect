@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d");
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
 let particlesArray = [];
-const numberOfParticles = 100;
+const numberOfParticles = 20;
 
 const mouse = {
   x: null,
@@ -44,11 +44,11 @@ class Particle {
     if (this.size < 0) {
       this.x = mouse.x + (Math.random() * 20 - 10);
       this.y = mouse.y + (Math.random() * 20 - 10);
-      this.size = Math.random() * 15 + 30;
+      this.size = Math.random() * 10 + 10;
       this.weight = Math.random() * 2 - 0.5;
     }
 
-    this.y += this.weight;
+    this.y += this.weight / 10;
     this.weight += 0.2;
 
     if (this.y > canvas.height - this.size) {
@@ -84,7 +84,7 @@ function connect() {
         (particlesArray[a].y - particlesArray[b].y) *
           (particlesArray[a].y - particlesArray[b].y);
 
-      if (distance < 2800) {
+      if (distance < 2000) {
         opacity = 1 - distance / 10000;
         ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
 
@@ -99,7 +99,7 @@ function connect() {
 }
 
 function animate() {
-  ctx.clearRect(0, 0, canvas.height, canvas.width);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   // ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
   // ctx.fillRect(0, 0, canvas.height, canvas.width);
 
